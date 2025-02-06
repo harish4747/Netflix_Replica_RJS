@@ -1,0 +1,8 @@
+.player{
+    display: flex;
+    height: 100vh;
+}
+.player iframe{
+    margin:auto;
+    justify-content: center;
+}
