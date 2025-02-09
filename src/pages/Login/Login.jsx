@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataBase } from "../../CheckUser";
+import { toast } from "react-toastify";
 
 const Login = () => {
   let { db, setDb } = useContext(DataBase);
@@ -29,22 +30,27 @@ const Login = () => {
       details.password &&
       details.email
     ) {
-      setDb([...db, details]);
-      setDetails({
-        username: "",
-        password: "",
-        email: "",
-      });
+      if (!details.email.includes("@") && details.email.length < 5) {
+        toast.error("Enter Valid Email");
+      } else if (details.password.length < 4) {
+        toast.error("Password minimum length is 4");
+      } else {
+        setDb([...db, details]);
+        setDetails({
+          username: "",
+          password: "",
+          email: "",
+        });
+      }
     } else if (signState == "Sign In" && details.password && details.email) {
       let isUser = db.filter((val) => {
-        console.log(
-          val.email === details.email && val.password === details.password
-        );
         return val.email === details.email && val.password === details.password;
       });
-      isUser.length !== 0 ? navigate("/home") : alert("Check user Name and Password");;
+      isUser.length !== 0
+        ? navigate("/home")
+        : toast.error("Check user Name and Password");
     } else {
-      alert("Input fields should not be empty");
+      toast.error("Input fields should not be empty");
     }
   };
 

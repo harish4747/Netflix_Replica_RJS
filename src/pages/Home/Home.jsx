@@ -6,9 +6,15 @@ import play_icon from "../../assets/play_icon.png";
 import info_icon from "../../assets/info_icon.png";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import Footer from "../../components/Footer/Footer";
-// import TitleCards from "../../components/TitleCards/TitleCards";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/player", { state: { title: "The Protector : Season 2" } });
+  };
+
   return (
     <div className="home">
       <Navbar />
@@ -22,7 +28,7 @@ const Home = () => {
             immortal enemy.
           </p>
           <div className="hero-btns">
-            <button className="btn">
+            <button className="btn" onClick={handleClick}>
               <img src={play_icon} alt="" />
               Play
             </button>
@@ -34,13 +40,12 @@ const Home = () => {
           <TitleCards />
         </div>
       </div>
-      <div className="more-cards">
-      <TitleCards title={"Blockbuster Movies"} />
-      <TitleCards title={"Only on Netflix"}/>
-      <TitleCards title={"Upcomming"}/>
-      <TitleCards title={"Top Pics for You"}/>
+      <div className="more-cards" id="movies">
+        <TitleCards title={"Upcomming"} category="upcoming" />
+        <TitleCards title={"Popular on Netflix"} category="popular" />
+        <TitleCards title={"Top Pics for You"} category="top_rated" />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

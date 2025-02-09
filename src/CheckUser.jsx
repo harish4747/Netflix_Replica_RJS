@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export let DataBase = createContext();
 
@@ -9,6 +10,10 @@ const CheckUser = ({ children }) => {
   return (
     <DataBase.Provider value={{ db, setDb }}>{children}</DataBase.Provider>
   );
+};
+
+CheckUser.propTypes = {
+  children: PropTypes.children,
 };
 
 export default CheckUser;

@@ -4,25 +4,43 @@ import search_icon from "../../assets/search_icon.svg";
 import bell_icon from "../../assets/bell_icon.svg";
 import profile_img from "../../assets/profile_img.png";
 import caret_icon from "../../assets/caret_icon.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const Navbar = () => {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate();
+  const navRef = useRef();
 
-  const handleSignOut=()=>{
-    navigate("/")
-  }
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= 70) {
+        navRef.current.classList.add("nav-dark");
+      } else {
+        navRef.current.classList.remove("nav-dark");
+      }
+    });
+  }, []);
+
+  const handleSignOut = () => {
+    navigate("/");
+  };
 
   return (
-    <div className="navbar">
+    <div className="navbar" ref={navRef}>
       <div className="navbar-left">
         <img src={logo} alt="not found" />
         <ul>
-          <li>Home</li>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
           <li>Tv Shows</li>
-          <li>Movies</li>
-          <li>New & Popular</li>
+          <li>
+            <a href="#movies">Movies</a>
+          </li>
+          <li>
+            <a href="#popular">New & Popular</a>
+          </li>
           <li>My List</li>
           <li>Browse by Language</li>
         </ul>

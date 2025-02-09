@@ -8,6 +8,7 @@
 }
 
 .hero-caption {
+  height: 120vh;
   position: absolute;
   width: 100%;
   padding: 6%;
@@ -63,5 +64,5 @@
 }
 .more-cards {
   padding-left: 6%;
-  
+  margin-top: 150px;
 }
